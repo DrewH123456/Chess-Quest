@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cea8tu4yjal50"]
+
+[ext_resource type="Script" path="res://Piece.gd" id="1_rhyx0"]
+[ext_resource type="Texture2D" uid="uid://crc1nlg70eb8c" path="res://Piece Images/black_bishop.png" id="2_m38si"]
+
+[node name="Piece" type="Node2D"]
+scale = Vector2(1.5, 1.5)
+script = ExtResource("1_rhyx0")
+
+[node name="Icon" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_m38si")
+
+[connection signal="gui_input" from="Icon" to="." method="_on_icon_gui_input"]
