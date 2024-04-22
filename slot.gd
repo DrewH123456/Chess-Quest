@@ -26,6 +26,8 @@ func set_filter(color = DataHandler.slot_states.NONE):
 			filter_path.color = Color(0,1,0,0.4)
 		DataHandler.slot_states.CHECK:
 			filter_path.color = Color(0,0,0.6,0.9)
+		DataHandler.slot_states.HINT:
+			filter_path.color = Color(0,0,1,0.2)
 
 # Emits slot_clicked signal upon mouse click, passing in self as slot
 func _on_filter_gui_input(event):

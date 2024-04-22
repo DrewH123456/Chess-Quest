@@ -49,10 +49,10 @@ columns = 8
 
 [node name="TestButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 832.0
-offset_top = 68.0
-offset_right = 957.0
-offset_bottom = 134.0
+offset_left = 839.0
+offset_top = 65.0
+offset_right = 969.0
+offset_bottom = 132.0
 theme_override_font_sizes/font_size = 40
 text = "Test"
 
@@ -67,12 +67,108 @@ script = ExtResource("4_bghcj")
 
 [node name="TestPuzzle" type="Button" parent="."]
 layout_mode = 0
-offset_left = 832.0
-offset_top = 147.0
-offset_right = 958.0
-offset_bottom = 219.0
+offset_left = 839.0
+offset_top = 141.0
+offset_right = 969.0
+offset_bottom = 213.0
 theme_override_font_sizes/font_size = 40
 text = "Puzzle"
 
+[node name="TestClear" type="Button" parent="."]
+layout_mode = 0
+offset_left = 840.0
+offset_top = 302.0
+offset_right = 968.0
+offset_bottom = 376.0
+theme_override_font_sizes/font_size = 40
+text = "Clear"
+
+[node name="ProvideHint" type="Button" parent="."]
+layout_mode = 0
+offset_left = 839.0
+offset_top = 386.0
+offset_right = 965.0
+offset_bottom = 457.0
+theme_override_font_sizes/font_size = 40
+text = "Hint
+"
+
+[node name="TestMultiPuzzle" type="Button" parent="."]
+layout_mode = 0
+offset_left = 782.0
+offset_top = 222.0
+offset_right = 1025.0
+offset_bottom = 294.0
+theme_override_font_sizes/font_size = 40
+text = "Multi-Puzzle"
+
+[node name="Restart" type="Button" parent="."]
+layout_mode = 0
+offset_left = 832.0
+offset_top = 477.0
+offset_right = 980.0
+offset_bottom = 550.0
+theme_override_font_sizes/font_size = 40
+text = "Restart	"
+
+[node name="Previous" type="Button" parent="."]
+layout_mode = 0
+offset_left = 722.0
+offset_top = 566.0
+offset_right = 895.0
+offset_bottom = 629.0
+theme_override_font_sizes/font_size = 40
+text = "Previous"
+
+[node name="Puzzle 1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 989.0
+offset_top = 35.0
+offset_right = 1020.0
+offset_bottom = 66.0
+text = "1"
+
+[node name="Puzzle 2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1027.0
+offset_top = 35.0
+offset_right = 1058.0
+offset_bottom = 66.0
+text = "2"
+
+[node name="Puzzle 3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1066.0
+offset_top = 35.0
+offset_right = 1097.0
+offset_bottom = 66.0
+text = "3"
+
+[node name="Puzzle 4" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1007.0
+offset_top = 72.0
+offset_right = 1038.0
+offset_bottom = 103.0
+text = "4"
+
+[node name="Puzzle 5" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1046.0
+offset_top = 72.0
+offset_right = 1077.0
+offset_bottom = 103.0
+text = "5"
+
 [connection signal="pressed" from="TestButton" to="." method="_on_test_button_pressed"]
 [connection signal="pressed" from="TestPuzzle" to="." method="_on_test_puzzle_pressed"]
+[connection signal="pressed" from="TestClear" to="." method="_on_test_clear_pressed"]
+[connection signal="pressed" from="ProvideHint" to="." method="_on_provide_hint_pressed"]
+[connection signal="pressed" from="TestMultiPuzzle" to="." method="_on_test_multi_puzzle_pressed"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Puzzle 1" to="." method="_on_puzzle_1_pressed"]
+[connection signal="pressed" from="Puzzle 2" to="." method="_on_puzzle_2_pressed"]
+[connection signal="pressed" from="Puzzle 3" to="." method="_on_puzzle_3_pressed"]
+[connection signal="pressed" from="Puzzle 4" to="." method="_on_puzzle_4_pressed"]
+[connection signal="pressed" from="Puzzle 5" to="." method="_on_puzzle_5_pressed"]
