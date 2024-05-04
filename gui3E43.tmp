@@ -113,10 +113,10 @@ text = "Restart	"
 
 [node name="Previous" type="Button" parent="."]
 layout_mode = 0
-offset_left = 668.0
-offset_top = 572.0
-offset_right = 841.0
-offset_bottom = 635.0
+offset_left = 722.0
+offset_top = 566.0
+offset_right = 895.0
+offset_bottom = 629.0
 theme_override_font_sizes/font_size = 40
 text = "Previous"
 
@@ -160,16 +160,6 @@ offset_right = 1077.0
 offset_bottom = 103.0
 text = "5"
 
-[node name="CaptureState" type="Button" parent="."]
-layout_mode = 0
-offset_left = 867.0
-offset_top = 567.0
-offset_right = 1139.0
-offset_bottom = 630.0
-theme_override_font_sizes/font_size = 40
-text = "Capture State
-"
-
 [connection signal="pressed" from="TestButton" to="." method="_on_test_button_pressed"]
 [connection signal="pressed" from="TestPuzzle" to="." method="_on_test_puzzle_pressed"]
 [connection signal="pressed" from="TestClear" to="." method="_on_test_clear_pressed"]
@@ -182,4 +172,3 @@ text = "Capture State
 [connection signal="pressed" from="Puzzle 3" to="." method="_on_puzzle_3_pressed"]
 [connection signal="pressed" from="Puzzle 4" to="." method="_on_puzzle_4_pressed"]
 [connection signal="pressed" from="Puzzle 5" to="." method="_on_puzzle_5_pressed"]
-[connection signal="pressed" from="CaptureState" to="." method="_on_capture_state_pressed"]
