@@ -1,11 +1,12 @@
 extends Control
 
-@onready var slot_scene = preload ("res://slot.tscn")
+@onready var slot_scene = preload("res://slot.tscn")
 @onready var board_grid = $ChessBoard/BoardGrid
-@onready var piece_scene = preload ("res://piece.tscn")
+@onready var piece_scene = preload("res://piece.tscn")
 @onready var chess_board = $ChessBoard
 @onready var bitboard = $BitBoard
 @onready var GeneratePath = $GeneratePath
+var main_menu = "res://main.tscn"
 
 var grid_array := [] # Contains all 64 slots(This is how you interact with slots)
 var piece_array := [] # Represents piece assigned to each of the 64 slots. 0 if empty
@@ -14,8 +15,6 @@ var icon_offset := Vector2(39, 39) # Centers chess pieces within slot
 var fen = "8/8/k4r1R/8/8/5n2/n7/8"
 var puzzle_fen = "r3n1k1/pb5q/1p2N2p/P2pP2r/4nQ2/1PbRRN1P/5PBK/8 w - - 3 30"
 var piece_selected = null
-var piece_to_move = null
-var puzzle_destination = null
 var puzzle_mode : bool = false
 var isWhite : bool = true
 var current_puzzle = null
@@ -30,7 +29,7 @@ var removed_piece_type = null
 var second_hint : bool = false
 var puzzle_set = null
 var test_puzzle = ["4r3/1pp2rbk/6pn/4n3/P3BN1q/1PB2bPP/8/2Q1RRK1 b - - 0 31", [39, 46], [46, 54], [37], [54], 2, false]
-
+	
 # Spawns slots
 func _ready():
 	for i in range(64):
@@ -117,7 +116,7 @@ func string_to_bool(is_white: String) -> bool:
 		assert(false, "Error loading text file, is_white must be either 'White' or 'Black'")
 		return false
 
-# Upon creation of slot, assigned slot_ID, added to board_grid, and inserted into grid_array
+# Upon creation of slot, assigned slot_ID, added to bo	ard_grid, and inserted into grid_array
 func create_slot():
 	var new_slot = slot_scene.instantiate()
 	new_slot.slot_ID = grid_array.size()
@@ -158,8 +157,6 @@ func puzzle_move(slot) -> void:
 	if (puzzle_move_count == total_puzzle_moves):
 		puzzle_end() 
 		return
-	#piece_selected = piece_array[current_puzzle[1][puzzle_move_count]]
-	#puzzle_destination = grid_array[current_puzzle[2][puzzle_move_count]]
 	lock_movement = true
 	await get_tree().create_timer(.5).timeout
 	lock_movement = false # should this go after move_piece?
@@ -421,8 +418,7 @@ func _on_previous_pressed():
 	move_piece(piece_to_unmove, prev_slot)
 	if temp_removed_piece_slot:
 		add_piece(temp_removed_piece_type, temp_removed_piece_slot)
-		bitboard.call("AddPiece", 63 - temp_removed_piece_slot, temp_removed_piece_type) #unsure what this does
-	#move_piece(piece_to_unmove, prev_slot)
+		bitboard.call("AddPiece", 63 - temp_removed_piece_slot, temp_removed_piece_type)
 	isWhite = !isWhite
 	lock_movement = false
 	allow_retry = false
@@ -456,4 +452,8 @@ func _on_puzzle_5_pressed():
 	current_puzzle = puzzle_set[4]
 	init_puzzle(puzzle_set[4])
 
-
+func _on_main_menu_pressed():
+	print("hello")
+	#get_tree().get_root().get_node(main_menu).queue_free()
+	get_tree().change_scene_to_file(main_menu)
+	#get_tree().reload_current_scene() 

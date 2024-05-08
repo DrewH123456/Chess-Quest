@@ -170,6 +170,17 @@ theme_override_font_sizes/font_size = 40
 text = "Capture State
 "
 
+[node name="Main_Menu" type="Button" parent="."]
+layout_mode = 1
+offset_left = 681.0
+offset_top = 40.0
+offset_right = 777.0
+offset_bottom = 94.0
+theme_override_font_sizes/font_size = 0
+text = "Main Menu
+
+"
+
 [connection signal="pressed" from="TestButton" to="." method="_on_test_button_pressed"]
 [connection signal="pressed" from="TestPuzzle" to="." method="_on_test_puzzle_pressed"]
 [connection signal="pressed" from="TestClear" to="." method="_on_test_clear_pressed"]
@@ -183,3 +194,4 @@ text = "Capture State
 [connection signal="pressed" from="Puzzle 4" to="." method="_on_puzzle_4_pressed"]
 [connection signal="pressed" from="Puzzle 5" to="." method="_on_puzzle_5_pressed"]
 [connection signal="pressed" from="CaptureState" to="." method="_on_capture_state_pressed"]
+[connection signal="pressed" from="Main_Menu" to="." method="_on_main_menu_pressed"]
