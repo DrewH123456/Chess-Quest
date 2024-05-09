@@ -1,15 +1,13 @@
 extends Control
 
+@onready var puzzle_mode = preload("res://puzzle_mode.tscn")
 @onready var slot_scene = preload("res://slot.tscn")
 @onready var board_grid = $ChessBoard/BoardGrid
 @onready var chess_board = $ChessBoard
-@onready var puzzle_button = $Button as Button
-@onready var quit_button = $Quit_Button as Button
-#@onready var puzzle_mode = preload("res://gui.tscn") as PackedScene
-var puzzle_mode = "res://puzzle_mode.tscn"
-var opening_mode = "res://opening_tutorial.tscn"
+var main_menu = "res://main.tscn"
+
 var grid_array = []
-var piece_array := []
+var piece_selected = null
 
 func _ready():
 	for i in range(64):
@@ -25,32 +23,22 @@ func _ready():
 		if colorbit == 0:
 			colorbit = 1
 		else: colorbit = 0
-		
-	piece_array.resize(64)
-	piece_array.fill(0)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("mouse_right") and piece_selected:
+		piece_selected = null
+		clear_board_filter()
 
-# Upon creation of slot, assigned slot_ID, added to bo	ard_grid, and inserted into grid_array
+# Upon creation of slot, assigned slot_ID, added to board_grid, and inserted into grid_array
 func create_slot():
 	var new_slot = slot_scene.instantiate()
 	new_slot.slot_ID = grid_array.size()
 	board_grid.add_child(new_slot)
 	grid_array.push_back(new_slot)
 
+# Upon being clicked, sends user to main menu
 func _on_button_pressed():
-	print("Hello")
-	#var puzzle_instance = puzzle_mode.instance()
-	get_tree().change_scene_to_file(puzzle_mode)
-	#print("Hello")
-	#hide()
-	
-func _on_quit_button_pressed():
-	get_tree().quit()	
+	get_tree().change_scene_to_file(main_menu)
 
-
-func _on_opening_button_pressed():
-	get_tree().change_scene_to_file(opening_mode)

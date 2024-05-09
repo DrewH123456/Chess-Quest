@@ -54,11 +54,20 @@ text = "Puzzles"
 
 [node name="Quit_Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 843.0
-offset_top = 177.0
-offset_right = 949.0
-offset_bottom = 236.0
+offset_left = 845.0
+offset_top = 237.0
+offset_right = 951.0
+offset_bottom = 296.0
 text = "Quit"
+
+[node name="Opening_Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 829.0
+offset_top = 157.0
+offset_right = 968.0
+offset_bottom = 214.0
+text = "Opening Tutorial"
 
 [connection signal="pressed" from="Puzzle_Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Quit_Button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Opening_Button" to="." method="_on_opening_button_pressed"]

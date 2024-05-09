@@ -6,6 +6,7 @@ extends Control
 @onready var chess_board = $ChessBoard
 @onready var bitboard = $BitBoard
 @onready var GeneratePath = $GeneratePath
+@onready var PuzzleTextEdit = $PuzzleTextEdit
 var main_menu = "res://main.tscn"
 
 var grid_array := [] # Contains all 64 slots(This is how you interact with slots)
@@ -93,7 +94,8 @@ func load_puzzles_from_file(file_path: String, datahandler_array: Array) -> void
 			appended_array.append(string_to_bool(parsed_puzzle[2]))
 			datahandler_array.append(appended_array)
 	else:
-		print("Failed to load file")
+		file.close()
+		assert(false, "Failed to load file")
 	file.close()
 
 # Turn string into fen string array
@@ -146,8 +148,10 @@ func puzzle_move(slot) -> void:
 	# if current board matches correct puzzle move
 	if (current_board_to_fen(piece_array) == current_puzzle[0][puzzle_move_count+1]):
 		print("Nice work")
+		PuzzleTextEdit.call("add_text", "Nice work")
 	else: 
 		print("Try again")
+		PuzzleTextEdit.call("add_text", "Try again")
 		#SAVE THE SLOT AND PIECE_SELECTED SO PREV CAN
 		piece_to_unmove = piece_selected
 		lock_movement = true
@@ -201,8 +205,8 @@ func differentiate_fen(current_board: Array, next_board: Array) -> Array:
 			if !typeof(current_board[i]) == TYPE_INT || !typeof(next_board[i]) == TYPE_INT:
 				slots.append(i)
 	if slots.size() != 2:
-		for i in slots:
-			print(i)
+		#for i in slots:
+			#print(i)
 		assert(false, "Error identifying 2 different slots when comparing fen strings")
 	return slots
 		
@@ -228,6 +232,7 @@ func puzzle_end():
 	puzzle_mode = false
 	allow_retry = false
 	print("Puzzle solved!")
+	PuzzleTextEdit.call("add_text", "Puzzle solved!")
 
 # Move selected piece to given destination
 func move_piece(piece, destination) -> void:
@@ -332,6 +337,7 @@ func randomly_select_puzzle(puzzles: Array) -> Array :
 	return random_puzzle
 	
 func clear_board():
+	PuzzleTextEdit.call("add_text", "")
 	lock_movement = false
 	puzzle_mode = false
 	removed_piece_slot = null
@@ -354,6 +360,7 @@ func _on_test_button_pressed():
 	parse_fen(curr_boardstate)
 	bitboard.call("InitBitBoard", curr_boardstate)
 	print(curr_boardstate)
+	PuzzleTextEdit.call("add_text", curr_boardstate)
 
 func _on_test_puzzle_pressed():
 	puzzle_set = DataHandler.single_move_puzzles
@@ -375,9 +382,11 @@ func _on_test_clear_pressed():
 func _on_provide_hint_pressed():
 	if !puzzle_mode:
 		print("Not in puzzle mode")
+		PuzzleTextEdit.call("add_text", "Not in puzzle mode")
 		return
 	if second_hint:
 		print("h")
+		PuzzleTextEdit.call("add_text", "h")
 	else:
 		if allow_retry:
 			_on_previous_pressed()
@@ -407,13 +416,16 @@ func _on_restart_pressed():
 		puzzle_mode = true
 	else:
 		print("Not in puzzle mode")
+		PuzzleTextEdit.call("add_text", "Not in puzzle mode")
 
 func _on_previous_pressed():
 	#var add_piece = removed_piece_slot
+	PuzzleTextEdit.call("add_text", "")
 	var temp_removed_piece_type = removed_piece_type
 	var temp_removed_piece_slot = removed_piece_slot
 	if !allow_retry:
 		print("Can't retry")
+		PuzzleTextEdit.call("add_text", "Can't retry")
 		return
 	move_piece(piece_to_unmove, prev_slot)
 	if temp_removed_piece_slot:

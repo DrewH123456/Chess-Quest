@@ -1,18 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dyk4w48v2tudo"]
+[gd_scene load_steps=6 format=3 uid="uid://dyk4w48v2tudo"]
 
-[ext_resource type="Script" path="res://GUI.gd" id="1_ndpvw"]
-[ext_resource type="Script" path="res://Bitboard.cs" id="2_tpv5b"]
-[ext_resource type="Script" path="res://DataHandlerCS.cs" id="3_vqiuh"]
-[ext_resource type="Script" path="res://GeneratePath.cs" id="4_bghcj"]
+[ext_resource type="Script" path="res://puzzle_mode.gd" id="1_rd2i4"]
+[ext_resource type="Script" path="res://Bitboard.cs" id="2_8nms4"]
+[ext_resource type="Script" path="res://DataHandlerCS.cs" id="3_4qdxx"]
+[ext_resource type="Script" path="res://GeneratePath.cs" id="4_00esy"]
+[ext_resource type="Script" path="res://PuzzleTextEdit.gd" id="5_32lff"]
 
-[node name="GUI" type="Control"]
+[node name="Puzzle Mode" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_ndpvw")
+script = ExtResource("1_rd2i4")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -57,13 +58,13 @@ theme_override_font_sizes/font_size = 40
 text = "Test"
 
 [node name="BitBoard" type="Node2D" parent="."]
-script = ExtResource("2_tpv5b")
+script = ExtResource("2_8nms4")
 
 [node name="DataHandlerCS" type="Node2D" parent="."]
-script = ExtResource("3_vqiuh")
+script = ExtResource("3_4qdxx")
 
 [node name="GeneratePath" type="Node" parent="."]
-script = ExtResource("4_bghcj")
+script = ExtResource("4_00esy")
 
 [node name="TestPuzzle" type="Button" parent="."]
 layout_mode = 0
@@ -104,19 +105,19 @@ text = "Multi-Puzzle"
 
 [node name="Restart" type="Button" parent="."]
 layout_mode = 0
-offset_left = 832.0
-offset_top = 477.0
-offset_right = 980.0
-offset_bottom = 550.0
+offset_left = 940.0
+offset_top = 469.0
+offset_right = 1088.0
+offset_bottom = 542.0
 theme_override_font_sizes/font_size = 40
 text = "Restart	"
 
 [node name="Previous" type="Button" parent="."]
 layout_mode = 0
-offset_left = 668.0
-offset_top = 572.0
-offset_right = 841.0
-offset_bottom = 635.0
+offset_left = 742.0
+offset_top = 472.0
+offset_right = 915.0
+offset_bottom = 535.0
 theme_override_font_sizes/font_size = 40
 text = "Previous"
 
@@ -178,8 +179,17 @@ offset_right = 777.0
 offset_bottom = 94.0
 theme_override_font_sizes/font_size = 0
 text = "Main Menu
-
 "
+
+[node name="PuzzleTextEdit" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 658.0
+offset_top = 546.0
+offset_right = 783.0
+offset_bottom = 635.0
+placeholder_text = "hi"
+wrap_mode = 1
+script = ExtResource("5_32lff")
 
 [connection signal="pressed" from="TestButton" to="." method="_on_test_button_pressed"]
 [connection signal="pressed" from="TestPuzzle" to="." method="_on_test_puzzle_pressed"]
