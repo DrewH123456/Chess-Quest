@@ -46,6 +46,10 @@ var single_move_puzzles := [
 var multi_move_puzzles := [
 ]
 
+# Fen strings, total moves, isWhite
+var queens_gambit_boardstates := [
+]
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

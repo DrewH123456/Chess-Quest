@@ -9,7 +9,6 @@ extends Control
 var puzzle_mode = "res://puzzle_mode.tscn"
 var opening_mode = "res://opening_tutorial.tscn"
 var grid_array = []
-var piece_array := []
 
 func _ready():
 	for i in range(64):
@@ -25,9 +24,6 @@ func _ready():
 		if colorbit == 0:
 			colorbit = 1
 		else: colorbit = 0
-		
-	piece_array.resize(64)
-	piece_array.fill(0)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

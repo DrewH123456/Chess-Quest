@@ -1,0 +1,3 @@
+[4r3/1pp2rbk/6pn/4n3/P3BN1q/1PB2bPP/8/2Q1RRK1, 4r3/1pp2rbk/6pn/4n3/P3BN2/1PB2bqP/8/2Q1RRK1, 4r3/1pp2rbk/6pn/4n3/P3B3/1PB2bqP/6N1/2Q1RRK1, 4r3/1pp2rbk/6pn/4n3/P3B3/1PB2b1P/6q1/2Q1RRK1]; 3; Black
+[rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR, rnbqkbnr/pppppppp/8/8/3P4/8/PPP1PPPP/RNBQKBNR, rnbqkbnr/ppp1pppp/8/3p4/3P4/8/PPP1PPPP/RNBQKBNR, rnbqkbnr/ppp1pppp/8/3p4/2PP4/8/PP2PPPP/RNBQKBNR, rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP11PPPP/RNBQKBNR]; 4; White
+

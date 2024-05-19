@@ -29,8 +29,7 @@ var removed_piece_slot = null
 var removed_piece_type = null
 var second_hint : bool = false
 var puzzle_set = null
-var test_puzzle = ["4r3/1pp2rbk/6pn/4n3/P3BN1q/1PB2bPP/8/2Q1RRK1 b - - 0 31", [39, 46], [46, 54], [37], [54], 2, false]
-	
+
 # Spawns slots
 func _ready():
 	for i in range(64):

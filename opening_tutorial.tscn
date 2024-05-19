@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c7cqs1va0nbco"]
+[gd_scene load_steps=5 format=3 uid="uid://c7cqs1va0nbco"]
 
 [ext_resource type="Script" path="res://opening_tutorial.gd" id="1_t0s1u"]
 [ext_resource type="Script" path="res://OpeningTextEdit.gd" id="2_1flga"]
+[ext_resource type="Script" path="res://Bitboard.cs" id="3_5eoui"]
+[ext_resource type="Script" path="res://GeneratePath.cs" id="4_as3pl"]
 
 [node name="Opening Tutorial" type="Control"]
 layout_mode = 3
@@ -51,14 +53,57 @@ offset_right = 729.0
 offset_bottom = 62.0
 text = "Main"
 
+[node name="Queen\'s Gambit Tutorial" type="Button" parent="."]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 27.0
+offset_right = 802.0
+offset_bottom = 59.0
+text = "Queen's Gambit"
+
 [node name="OpeningTextEdit" type="TextEdit" parent="."]
 layout_mode = 0
 offset_left = 681.0
 offset_top = 482.0
 offset_right = 857.0
 offset_bottom = 623.0
-placeholder_text = "hi"
+placeholder_text = "Insert Text Here"
 editable = false
 script = ExtResource("2_1flga")
 
-[connection signal="pressed" from="Main_Button" to="." method="_on_button_pressed"]
+[node name="BitBoard" type="Node2D" parent="."]
+script = ExtResource("3_5eoui")
+
+[node name="GeneratePath" type="Node" parent="."]
+script = ExtResource("4_as3pl")
+
+[node name="Prev" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1025.0
+offset_top = 465.0
+offset_right = 1068.0
+offset_bottom = 496.0
+text = "Prev"
+
+[node name="Next" type="Button" parent="."]
+layout_mode = 0
+offset_left = 764.0
+offset_top = 95.0
+offset_right = 809.0
+offset_bottom = 126.0
+text = "Next
+"
+
+[node name="Previous" type="Button" parent="."]
+layout_mode = 0
+offset_left = 673.0
+offset_top = 93.0
+offset_right = 748.0
+offset_bottom = 124.0
+text = "Previous"
+
+[connection signal="pressed" from="Main_Button" to="." method="_on_main_pressed"]
+[connection signal="pressed" from="Queen's Gambit Tutorial" to="." method="_on_queens_gambit_tutorial_pressed"]
+[connection signal="pressed" from="Prev" to="." method="_on_prev_pressed"]
+[connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
