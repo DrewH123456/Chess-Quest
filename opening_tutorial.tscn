@@ -77,33 +77,79 @@ script = ExtResource("3_5eoui")
 [node name="GeneratePath" type="Node" parent="."]
 script = ExtResource("4_as3pl")
 
-[node name="Prev" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1025.0
-offset_top = 465.0
-offset_right = 1068.0
-offset_bottom = 496.0
-text = "Prev"
-
 [node name="Next" type="Button" parent="."]
 layout_mode = 0
-offset_left = 764.0
-offset_top = 95.0
-offset_right = 809.0
-offset_bottom = 126.0
+offset_left = 789.0
+offset_top = 355.0
+offset_right = 834.0
+offset_bottom = 386.0
 text = "Next
 "
 
 [node name="Previous" type="Button" parent="."]
 layout_mode = 0
-offset_left = 673.0
-offset_top = 93.0
-offset_right = 748.0
-offset_bottom = 124.0
+offset_left = 690.0
+offset_top = 356.0
+offset_right = 765.0
+offset_bottom = 387.0
 text = "Previous"
+
+[node name="Variation 1" type="Button" parent="."]
+layout_mode = 0
+offset_left = 681.0
+offset_top = 420.0
+offset_right = 726.0
+offset_bottom = 455.0
+text = "1"
+
+[node name="Variation 2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 748.0
+offset_top = 420.0
+offset_right = 792.0
+offset_bottom = 454.0
+text = "2"
+
+[node name="Variation 3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 816.0
+offset_top = 418.0
+offset_right = 859.0
+offset_bottom = 454.0
+text = "3"
+
+[node name="Slav" type="Button" parent="."]
+layout_mode = 0
+offset_left = 916.0
+offset_top = 28.0
+offset_right = 956.0
+offset_bottom = 59.0
+text = "Slav"
+
+[node name="Declined" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 28.0
+offset_right = 1136.0
+offset_bottom = 59.0
+text = "Declined
+"
+
+[node name="Accepted" type="Button" parent="."]
+layout_mode = 0
+offset_left = 964.0
+offset_top = 27.0
+offset_right = 1044.0
+offset_bottom = 58.0
+text = "Accepted"
 
 [connection signal="pressed" from="Main_Button" to="." method="_on_main_pressed"]
 [connection signal="pressed" from="Queen's Gambit Tutorial" to="." method="_on_queens_gambit_tutorial_pressed"]
-[connection signal="pressed" from="Prev" to="." method="_on_prev_pressed"]
 [connection signal="pressed" from="Next" to="." method="_on_next_pressed"]
 [connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Variation 1" to="." method="_on_variation_1_pressed"]
+[connection signal="pressed" from="Variation 2" to="." method="_on_variation_2_pressed"]
+[connection signal="pressed" from="Variation 3" to="." method="_on_variation_3_pressed"]
+[connection signal="pressed" from="Slav" to="." method="_on_slav_pressed"]
+[connection signal="pressed" from="Declined" to="." method="_on_declined_pressed"]
+[connection signal="pressed" from="Accepted" to="." method="_on_accepted_pressed"]

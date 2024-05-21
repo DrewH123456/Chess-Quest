@@ -7,6 +7,7 @@ extends Control
 @onready var bitboard = $BitBoard
 @onready var GeneratePath = $GeneratePath
 @onready var OpeningTextEdit = $OpeningTextEdit
+@onready var variation_scene = preload("res://variation.tscn")
 var main_menu = "res://main.tscn"
 
 var grid_array = []
@@ -33,6 +34,9 @@ var prev_slot_array = []
 var tutorial_mode : bool = false
 var prev_move_made : bool = false
 var took_piece_bool = []
+var variations = []
+var current_variation = null
+var variations_mode : bool = false
 
 func _ready():
 	for i in range(64):
@@ -51,8 +55,49 @@ func _ready():
 	piece_array.resize(64)
 	piece_array.fill(0)
 	load_puzzles_from_file("res://queens_gambit_opening.txt", DataHandler.queens_gambit_boardstates)
+	load_variations("variations.json")
+	for i in variations:
+		i.display_details()
+	
 	#load_puzzles_from_file("res://multimove_puzzles2.txt", DataHandler.multi_move_puzzles)
 	pass # Replace with function body.
+
+# Function to load variations from a file
+func load_variations(file_path: String) -> void:
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var json_as_text = file.get_as_text()
+	file.close()
+	var json_as_dict = JSON.parse_string(json_as_text)
+	if json_as_dict:
+		print(json_as_dict)
+	else:
+		print("Error parsing JSON: ")
+		return
+	if not json_as_dict.has("variations"):
+		print("JSON does not contain 'variations' key")
+		return
+	
+	var variations_data = json_as_dict
+	var variations_array = variations_data["variations"]
+#
+	# Create variations
+	for variation_data in variations_array:
+		var variation = variation_scene.instantiate()
+		variation.initialize(variation_data["fen"])
+		variations.append(variation)
+#
+	# Link variations
+	for i in range(variations.size()):
+		var variation_data = variations_array[i]
+		var variation = variations[i]
+#
+		if "previous" in variation_data:
+			if variation_data["previous"] != null:
+				variation.set_previous(variations[variation_data["previous"]])
+#
+		if "next" in variation_data:
+			for next_index in variation_data["next"]:
+				variation.add_next(variations[next_index])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -394,6 +439,7 @@ func _on_main_pressed():
 
 func _on_queens_gambit_tutorial_pressed():
 	clear_board()
+	variations_mode = false
 	tutorial_mode = true
 	current_puzzle = DataHandler.queens_gambit_boardstates[0]
 	parse_fen(current_puzzle[0][0])
@@ -425,18 +471,23 @@ func _on_prev_pressed():
 
 func _on_next_pressed():
 	if puzzle_move_count >= total_puzzle_moves:
+		print("No more next moves")
 		return
 	print("Next:")
 	make_enemy_move()
-	for i in took_piece_bool:
-		print(i)
+	#for i in took_piece_bool:
+		#print(i)
 	print("Puzzle Move Count: ", puzzle_move_count)
 	isWhite = !isWhite
 
 func _on_previous_pressed():
-	print("Prev:")
-	if puzzle_move_count <= 0:
+	if variations_mode:
+		variations_previous()
 		return
+	if puzzle_move_count <= 0:
+		print("No more previous moves")
+		return
+	print("Prev:")
 	prev_move_made = true
 	var move_slot = null
 	var piece_to_move = null
@@ -455,5 +506,59 @@ func _on_previous_pressed():
 		bitboard.call("AddPiece", 63 - prev_taken_slot, prev_taken_type)
 	puzzle_move_count -= 1
 	prev_move_made = false
+	isWhite = !isWhite
 	print("After: Taken array size: ", taken_slot_array.size(), ", ", "Move count: ", puzzle_move_count)
 	
+func variations_previous():
+	if current_variation.get_previous() != null:
+		clear_board()
+		current_variation = current_variation.get_previous()
+		parse_fen(current_variation.fen)
+		bitboard.call("InitBitBoard", current_variation.fen)
+	else:
+		print("No more prev")
+	
+func _on_variation_1_pressed():
+	if current_variation.next_variations.size() > 0:
+		clear_board()
+		current_variation = current_variation.next_variations[0]
+		parse_fen(current_variation.fen)
+		bitboard.call("InitBitBoard", current_variation.fen)
+	else:
+		print("No more next")
+
+
+func _on_variation_2_pressed():
+	if current_variation.next_variations.size() > 1:
+		clear_board()
+		current_variation = current_variation.next_variations[1]
+		parse_fen(current_variation.fen)
+		bitboard.call("InitBitBoard", current_variation.fen)
+	else:
+		print("No more next")
+
+
+func _on_variation_3_pressed():
+	if current_variation.next_variations.size() > 2:
+		clear_board()
+		current_variation = current_variation.next_variations[2]
+		parse_fen(current_variation.fen)
+		bitboard.call("InitBitBoard", current_variation.fen)
+	else:
+		print("No more next")
+
+
+func _on_slav_pressed():
+	variations_mode = true
+	clear_board()
+	current_variation = variations[0]
+	parse_fen(current_variation.fen)
+	bitboard.call("InitBitBoard", current_variation.fen)
+
+
+func _on_declined_pressed():
+	pass # Replace with function body.
+
+
+func _on_accepted_pressed():
+	pass # Replace with function body.

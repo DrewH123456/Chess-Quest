@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cixbfa6bfhcwj"]
+
+[ext_resource type="Script" path="res://Variation.gd" id="1_sefi3"]
+
+[node name="Variation" type="Node2D"]
+script = ExtResource("1_sefi3")
