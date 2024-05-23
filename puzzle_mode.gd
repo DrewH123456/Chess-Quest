@@ -184,7 +184,7 @@ func make_enemy_move() -> void:
 	var slot_2 = slots_array[1]
 	if typeof(piece_array[slot_1]) == TYPE_INT: # if slot_1 does not contain a piece, piece to move is in slot_2
 		next_enemy_move = piece_array[slot_2]
-		destination_slot = piece_array[slot_1].slot_ID
+		destination_slot = slot_1
 	elif ((piece_array[slot_1].type < 6 && isWhite) || (piece_array[slot_1].type > 6 && !isWhite)): #if slot_1 contains piece to move
 		next_enemy_move = piece_array[slot_1]
 		destination_slot = slot_2

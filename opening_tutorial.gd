@@ -232,7 +232,7 @@ func make_enemy_move() -> void:
 	var slot_2 = slots_array[1]
 	if typeof(piece_array[slot_1]) == TYPE_INT: # if slot_1 does not contain a piece, piece to move is in slot_2
 		next_enemy_move = piece_array[slot_2]
-		destination_slot = piece_array[slot_1].slot_ID
+		destination_slot = slot_1
 	elif ((piece_array[slot_1].type < 6 && isWhite) || (piece_array[slot_1].type > 6 && !isWhite)): #if slot_1 contains piece to move
 		next_enemy_move = piece_array[slot_1]
 		destination_slot = slot_2
@@ -244,6 +244,38 @@ func make_enemy_move() -> void:
 		#print("Last move made:")
 		#print("Reverting from: ", destination_slot)
 		#print("Reverting to: ", next_enemy_move.slot_ID)
+		prev_piece_array.append(destination_slot)
+		prev_slot_array.append(next_enemy_move.slot_ID)
+		if typeof(piece_array[slot_1]) == TYPE_INT || typeof(piece_array[slot_2]) == TYPE_INT:
+			took_piece_bool.append(false)
+		else:
+			took_piece_bool.append(true)
+	move_piece(next_enemy_move, destination_slot)
+	puzzle_move_count += 1
+
+func make_tutorial_move(next_fen: String) -> void:
+	print("Puzzle Move Count: ", puzzle_move_count)
+	var next_board = fen_to_piece_array(next_fen) #piece_array but for next move's fen 
+	var next_enemy_move = null
+	var destination_slot = null
+	var slots_array = differentiate_fen(piece_array, next_board) #contains two slots that contain different pieces
+	var slot_1 = slots_array[0]
+	var slot_2 = slots_array[1]
+	var string = ""
+	if typeof(piece_array[slot_1]) == TYPE_INT: # if slot_1 does not contain a piece, piece to move is in slot_2
+		next_enemy_move = piece_array[slot_2]
+		destination_slot = slot_1
+		string = "1"
+	elif ((piece_array[slot_1].type < 6 && isWhite) || (piece_array[slot_1].type > 6 && !isWhite)): #if slot_1 contains piece to move
+		next_enemy_move = piece_array[slot_1]
+		destination_slot = slot_2
+		string = "2"
+	else:
+		next_enemy_move = piece_array[slot_2] #if slot_2 contains piece to move
+		destination_slot = slot_1
+		string = "3"
+	# save destination_slot and next_enemy_move in array
+	if tutorial_mode:
 		prev_piece_array.append(destination_slot)
 		prev_slot_array.append(next_enemy_move.slot_ID)
 		if typeof(piece_array[slot_1]) == TYPE_INT || typeof(piece_array[slot_2]) == TYPE_INT:
@@ -310,7 +342,6 @@ func move_piece(piece, destination) -> void:
 	else:
 		removed_piece_type = null
 		removed_piece_slot = null
-	
 	remove_from_bitboard(piece)
 	# Smoothly move piece from original position to destination
 	var tween = get_tree().create_tween()
@@ -511,39 +542,34 @@ func _on_previous_pressed():
 	
 func variations_previous():
 	if current_variation.get_previous() != null:
-		clear_board()
 		current_variation = current_variation.get_previous()
-		parse_fen(current_variation.fen)
-		bitboard.call("InitBitBoard", current_variation.fen)
+		make_tutorial_move(current_variation.fen)
 	else:
 		print("No more prev")
 	
 func _on_variation_1_pressed():
 	if current_variation.next_variations.size() > 0:
-		clear_board()
 		current_variation = current_variation.next_variations[0]
-		parse_fen(current_variation.fen)
-		bitboard.call("InitBitBoard", current_variation.fen)
+		make_tutorial_move(current_variation.fen)
+		isWhite = !isWhite
 	else:
 		print("No more next")
 
 
 func _on_variation_2_pressed():
 	if current_variation.next_variations.size() > 1:
-		clear_board()
 		current_variation = current_variation.next_variations[1]
-		parse_fen(current_variation.fen)
-		bitboard.call("InitBitBoard", current_variation.fen)
+		make_tutorial_move(current_variation.fen)
+		isWhite = !isWhite
 	else:
 		print("No more next")
 
 
 func _on_variation_3_pressed():
 	if current_variation.next_variations.size() > 2:
-		clear_board()
 		current_variation = current_variation.next_variations[2]
-		parse_fen(current_variation.fen)
-		bitboard.call("InitBitBoard", current_variation.fen)
+		make_tutorial_move(current_variation.fen)
+		isWhite = !isWhite
 	else:
 		print("No more next")
 
@@ -557,8 +583,16 @@ func _on_slav_pressed():
 
 
 func _on_declined_pressed():
-	pass # Replace with function body.
+	variations_mode = true
+	clear_board()
+	current_variation = variations[6]
+	parse_fen(current_variation.fen)
+	bitboard.call("InitBitBoard", current_variation.fen)
 
 
 func _on_accepted_pressed():
-	pass # Replace with function body.
+	variations_mode = true
+	clear_board()
+	current_variation = variations[5]
+	parse_fen(current_variation.fen)
+	bitboard.call("InitBitBoard", current_variation.fen)

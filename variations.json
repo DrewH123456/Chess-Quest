@@ -1,24 +1,39 @@
 {
 	"variations": [
 		{
-			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR w KQkq - 0 1",
+			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR",
 			"previous": null,
 			"next": [1, 2, 3]
 		},
 		{
-			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R b KQkq - 1 1",
+			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R",
+			"previous": 0,
+			"next": [4]
+		},
+		{
+			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR",
 			"previous": 0,
 			"next": []
 		},
 		{
-			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR w KQkq - 2 1",
+			"fen": "rnbqkbnr/pp2pppp/2p5/3P4/3P4/8/PP2PPPP/RNBQKBNR",
 			"previous": 0,
 			"next": []
 		},
 		{
-			"fen": "rnbqkbnr/pp2pppp/2p5/3P4/3P4/8/PP2PPPP/RNBQKBNR b KQkq - 3 1",
-			"previous": 0,
+			"fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R",
+			"previous": 1,
 			"next": []
-		}
+		},
+		{
+			"fen": "rnbqkbnr/ppp1pppp/8/8/2pP4/8/PP2PPPP/RNBQKBNR",
+			"previous": null,
+			"next": []
+		},
+		{
+			"fen": "rnbqkbnr/ppp2ppp/4p3/3p4/2PP4/8/PP2PPPP/RNBQKBNR",
+			"previous": null,
+			"next": [1, 2, 3]
+		},
 	]
 }
