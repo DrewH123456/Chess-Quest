@@ -542,6 +542,7 @@ func _on_previous_pressed():
 	
 func variations_previous():
 	if current_variation.get_previous() != null:
+		isWhite = !isWhite
 		current_variation = current_variation.get_previous()
 		make_tutorial_move(current_variation.fen)
 	else:
@@ -552,6 +553,7 @@ func _on_variation_1_pressed():
 		current_variation = current_variation.next_variations[0]
 		make_tutorial_move(current_variation.fen)
 		isWhite = !isWhite
+		print(isWhite)
 	else:
 		print("No more next")
 
