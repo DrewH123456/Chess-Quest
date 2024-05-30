@@ -9,6 +9,7 @@
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_t0s1u")
+dropdown_path = NodePath("Variation Dropdown")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -47,26 +48,27 @@ columns = 8
 
 [node name="Main_Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 670.0
-offset_top = 26.0
-offset_right = 729.0
-offset_bottom = 62.0
+offset_left = 699.0
+offset_top = 21.0
+offset_right = 758.0
+offset_bottom = 57.0
 text = "Main"
 
 [node name="Queen\'s Gambit Tutorial" type="Button" parent="."]
 layout_mode = 0
-offset_left = 750.0
-offset_top = 27.0
-offset_right = 802.0
-offset_bottom = 59.0
-text = "Queen's Gambit"
+offset_left = 693.0
+offset_top = 329.0
+offset_right = 826.0
+offset_bottom = 383.0
+text = "Queen's Gambit 
+Intro"
 
 [node name="OpeningTextEdit" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 681.0
-offset_top = 482.0
-offset_right = 857.0
-offset_bottom = 623.0
+offset_left = 675.0
+offset_top = 76.0
+offset_right = 1125.0
+offset_bottom = 321.0
 placeholder_text = "Insert Text Here"
 editable = false
 script = ExtResource("2_1flga")
@@ -79,69 +81,85 @@ script = ExtResource("4_as3pl")
 
 [node name="Next" type="Button" parent="."]
 layout_mode = 0
-offset_left = 789.0
-offset_top = 355.0
-offset_right = 834.0
-offset_bottom = 386.0
+offset_left = 916.0
+offset_top = 430.0
+offset_right = 976.0
+offset_bottom = 463.0
 text = "Next
 "
 
 [node name="Previous" type="Button" parent="."]
 layout_mode = 0
-offset_left = 690.0
-offset_top = 356.0
-offset_right = 765.0
-offset_bottom = 387.0
+offset_left = 801.0
+offset_top = 430.0
+offset_right = 876.0
+offset_bottom = 466.0
 text = "Previous"
 
 [node name="Variation 1" type="Button" parent="."]
 layout_mode = 0
-offset_left = 681.0
-offset_top = 420.0
-offset_right = 726.0
-offset_bottom = 455.0
+offset_left = 782.0
+offset_top = 539.0
+offset_right = 843.0
+offset_bottom = 587.0
 text = "1"
 
 [node name="Variation 2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 748.0
-offset_top = 420.0
-offset_right = 792.0
-offset_bottom = 454.0
+offset_left = 863.0
+offset_top = 540.0
+offset_right = 927.0
+offset_bottom = 587.0
 text = "2"
 
 [node name="Variation 3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 816.0
-offset_top = 418.0
-offset_right = 859.0
-offset_bottom = 454.0
+offset_left = 945.0
+offset_top = 539.0
+offset_right = 1009.0
+offset_bottom = 587.0
 text = "3"
 
-[node name="Slav" type="Button" parent="."]
+[node name="Help" type="Button" parent="."]
 layout_mode = 0
-offset_left = 916.0
-offset_top = 28.0
-offset_right = 956.0
-offset_bottom = 59.0
-text = "Slav"
+offset_left = 1049.0
+offset_top = 24.0
+offset_right = 1100.0
+offset_bottom = 58.0
+text = "Help"
 
-[node name="Declined" type="Button" parent="."]
+[node name="Title Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 1060.0
-offset_top = 28.0
-offset_right = 1136.0
-offset_bottom = 59.0
-text = "Declined
+offset_left = 780.0
+offset_top = 22.0
+offset_right = 1025.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 21
+text = "Queen's Gambit Tutorial"
+
+[node name="Routes Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 872.0
+offset_top = 494.0
+offset_right = 926.0
+offset_bottom = 517.0
+text = "Routes
 "
 
-[node name="Accepted" type="Button" parent="."]
+[node name="Explore Variation Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 964.0
-offset_top = 27.0
-offset_right = 1044.0
-offset_bottom = 58.0
-text = "Accepted"
+offset_left = 882.0
+offset_top = 326.0
+offset_right = 1099.0
+offset_bottom = 349.0
+text = "Explore Mainline Variations"
+
+[node name="Variation Dropdown" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 870.0
+offset_top = 353.0
+offset_right = 915.0
+offset_bottom = 373.0
 
 [connection signal="pressed" from="Main_Button" to="." method="_on_main_pressed"]
 [connection signal="pressed" from="Queen's Gambit Tutorial" to="." method="_on_queens_gambit_tutorial_pressed"]
@@ -150,6 +168,4 @@ text = "Accepted"
 [connection signal="pressed" from="Variation 1" to="." method="_on_variation_1_pressed"]
 [connection signal="pressed" from="Variation 2" to="." method="_on_variation_2_pressed"]
 [connection signal="pressed" from="Variation 3" to="." method="_on_variation_3_pressed"]
-[connection signal="pressed" from="Slav" to="." method="_on_slav_pressed"]
-[connection signal="pressed" from="Declined" to="." method="_on_declined_pressed"]
-[connection signal="pressed" from="Accepted" to="." method="_on_accepted_pressed"]
+[connection signal="item_selected" from="Variation Dropdown" to="." method="_on_variation_dropdown_item_selected"]

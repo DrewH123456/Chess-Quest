@@ -4,6 +4,7 @@ extends Node2D
 var fen: String
 var previous_variation: Node = null
 var next_variations: Array = []
+var analysis: String
 
 # Initialize the variation with the FEN string
 func initialize(fen_string: String) -> void:
@@ -31,6 +32,12 @@ func get_previous() -> Node:
 func get_next() -> Array:
 	return next_variations
 
+func set_analysis(analysis_string: String) -> void:
+	analysis = analysis_string
+	
+func get_analysis() -> String:
+	return analysis
+
 # Example function to display the variation details (for debugging)
 func display_details() -> void:
 	print("FEN: ", fen)
@@ -40,3 +47,4 @@ func display_details() -> void:
 		print("Previous: None")
 	for next_variation in next_variations:
 		print("Next: ", next_variation.get_fen())
+	print("Analysis: ", analysis)

@@ -7,6 +7,8 @@ extends Control
 @onready var bitboard = $BitBoard
 @onready var GeneratePath = $GeneratePath
 @onready var PuzzleTextEdit = $PuzzleTextEdit
+@export var dropdown_path: NodePath
+@onready var dropdown = get_node(dropdown_path)
 var main_menu = "res://main.tscn"
 
 var grid_array := [] # Contains all 64 slots(This is how you interact with slots)
@@ -50,7 +52,14 @@ func _ready():
 	piece_array.fill(0)
 	load_puzzles_from_file("res://singlemove_puzzles2.txt", DataHandler.single_move_puzzles)
 	load_puzzles_from_file("res://multimove_puzzles2.txt", DataHandler.multi_move_puzzles)
-	pass # Replace with function body.
+	add_items()
+
+func add_items():
+	dropdown.add_item("Puzzle 1")
+	dropdown.add_item("Puzzle 2")
+	dropdown.add_item("Puzzle 3")
+	dropdown.add_item("Puzzle 4")
+	dropdown.add_item("Puzzle 5")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -352,21 +361,6 @@ func clear_board():
 			piece_array[i].queue_free()
 			piece_array[i] = 0
 
-func _on_test_button_pressed():
-	var curr_boardstate = current_board_to_fen(piece_array)
-	clear_board()
-	#init_puzzle(test_puzzle)
-	parse_fen(curr_boardstate)
-	bitboard.call("InitBitBoard", curr_boardstate)
-	print(curr_boardstate)
-	PuzzleTextEdit.call("add_text", curr_boardstate)
-
-func _on_test_puzzle_pressed():
-	puzzle_set = DataHandler.single_move_puzzles
-
-func _on_test_multi_puzzle_pressed():
-	puzzle_set = DataHandler.multi_move_puzzles
-
 func init_puzzle(current_puzzle: Array):
 	parse_fen(current_puzzle[0][0])
 	bitboard.call("InitBitBoard", current_puzzle[0][0])
@@ -464,7 +458,14 @@ func _on_puzzle_5_pressed():
 	init_puzzle(puzzle_set[4])
 
 func _on_main_menu_pressed():
-	print("hello")
 	#get_tree().get_root().get_node(main_menu).queue_free()
 	get_tree().change_scene_to_file(main_menu)
 	#get_tree().reload_current_scene() 
+
+
+func _on_single_puzzle_pressed():
+	puzzle_set = DataHandler.single_move_puzzles
+
+
+func _on_multi_puzzle_pressed():
+	puzzle_set = DataHandler.multi_move_puzzles

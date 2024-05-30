@@ -14,6 +14,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rd2i4")
+dropdown_path = NodePath("Dropdown")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -48,15 +49,6 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 8
 
-[node name="TestButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 839.0
-offset_top = 65.0
-offset_right = 969.0
-offset_bottom = 132.0
-theme_override_font_sizes/font_size = 40
-text = "Test"
-
 [node name="BitBoard" type="Node2D" parent="."]
 script = ExtResource("2_8nms4")
 
@@ -66,136 +58,159 @@ script = ExtResource("3_4qdxx")
 [node name="GeneratePath" type="Node" parent="."]
 script = ExtResource("4_00esy")
 
-[node name="TestPuzzle" type="Button" parent="."]
+[node name="SinglePuzzle" type="Button" parent="."]
 layout_mode = 0
-offset_left = 839.0
-offset_top = 141.0
-offset_right = 969.0
-offset_bottom = 213.0
-theme_override_font_sizes/font_size = 40
-text = "Puzzle"
+offset_left = 675.0
+offset_top = 338.0
+offset_right = 838.0
+offset_bottom = 369.0
+text = "Single-Move Puzzles"
 
 [node name="TestClear" type="Button" parent="."]
 layout_mode = 0
-offset_left = 840.0
-offset_top = 302.0
-offset_right = 968.0
-offset_bottom = 376.0
-theme_override_font_sizes/font_size = 40
+offset_left = 785.0
+offset_top = 592.0
+offset_right = 838.0
+offset_bottom = 623.0
 text = "Clear"
 
 [node name="ProvideHint" type="Button" parent="."]
 layout_mode = 0
-offset_left = 839.0
-offset_top = 386.0
-offset_right = 965.0
-offset_bottom = 457.0
-theme_override_font_sizes/font_size = 40
+offset_left = 1054.0
+offset_top = 374.0
+offset_right = 1095.0
+offset_bottom = 405.0
 text = "Hint
 "
 
-[node name="TestMultiPuzzle" type="Button" parent="."]
+[node name="MultiPuzzle" type="Button" parent="."]
 layout_mode = 0
-offset_left = 782.0
-offset_top = 222.0
-offset_right = 1025.0
-offset_bottom = 294.0
-theme_override_font_sizes/font_size = 40
-text = "Multi-Puzzle"
+offset_left = 675.0
+offset_top = 375.0
+offset_right = 838.0
+offset_bottom = 406.0
+text = "Multi-Move Puzzles"
 
 [node name="Restart" type="Button" parent="."]
 layout_mode = 0
-offset_left = 940.0
-offset_top = 469.0
-offset_right = 1088.0
-offset_bottom = 542.0
-theme_override_font_sizes/font_size = 40
+offset_left = 979.0
+offset_top = 374.0
+offset_right = 1044.0
+offset_bottom = 405.0
 text = "Restart	"
 
 [node name="Previous" type="Button" parent="."]
 layout_mode = 0
-offset_left = 742.0
-offset_top = 472.0
-offset_right = 915.0
-offset_bottom = 535.0
-theme_override_font_sizes/font_size = 40
+offset_left = 980.0
+offset_top = 337.0
+offset_right = 1055.0
+offset_bottom = 368.0
 text = "Previous"
 
 [node name="Puzzle 1" type="Button" parent="."]
 layout_mode = 0
-offset_left = 989.0
-offset_top = 35.0
-offset_right = 1020.0
-offset_bottom = 66.0
+offset_left = 656.0
+offset_top = 571.0
+offset_right = 687.0
+offset_bottom = 602.0
 text = "1"
 
 [node name="Puzzle 2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1027.0
-offset_top = 35.0
-offset_right = 1058.0
-offset_bottom = 66.0
+offset_left = 694.0
+offset_top = 571.0
+offset_right = 725.0
+offset_bottom = 602.0
 text = "2"
 
 [node name="Puzzle 3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1066.0
-offset_top = 35.0
-offset_right = 1097.0
-offset_bottom = 66.0
+offset_left = 733.0
+offset_top = 571.0
+offset_right = 764.0
+offset_bottom = 602.0
 text = "3"
 
 [node name="Puzzle 4" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1007.0
-offset_top = 72.0
-offset_right = 1038.0
-offset_bottom = 103.0
+offset_left = 674.0
+offset_top = 608.0
+offset_right = 705.0
+offset_bottom = 639.0
 text = "4"
 
 [node name="Puzzle 5" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1046.0
-offset_top = 72.0
-offset_right = 1077.0
-offset_bottom = 103.0
+offset_left = 713.0
+offset_top = 608.0
+offset_right = 744.0
+offset_bottom = 639.0
 text = "5"
-
-[node name="CaptureState" type="Button" parent="."]
-layout_mode = 0
-offset_left = 867.0
-offset_top = 567.0
-offset_right = 1139.0
-offset_bottom = 630.0
-theme_override_font_sizes/font_size = 40
-text = "Capture State
-"
 
 [node name="Main_Menu" type="Button" parent="."]
 layout_mode = 1
-offset_left = 681.0
-offset_top = 40.0
-offset_right = 777.0
-offset_bottom = 94.0
+offset_left = 702.0
+offset_top = 19.0
+offset_right = 761.0
+offset_bottom = 55.0
 theme_override_font_sizes/font_size = 0
-text = "Main Menu
-"
+text = "Main"
 
 [node name="PuzzleTextEdit" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 658.0
-offset_top = 546.0
-offset_right = 783.0
-offset_bottom = 635.0
-placeholder_text = "hi"
+offset_left = 675.0
+offset_top = 76.0
+offset_right = 1125.0
+offset_bottom = 321.0
+placeholder_text = "Insert Text Here"
 wrap_mode = 1
 script = ExtResource("5_32lff")
 
-[connection signal="pressed" from="TestButton" to="." method="_on_test_button_pressed"]
-[connection signal="pressed" from="TestPuzzle" to="." method="_on_test_puzzle_pressed"]
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1043.0
+offset_top = 19.0
+offset_right = 1095.0
+offset_bottom = 52.0
+text = "Help
+"
+
+[node name="Puzzles Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 850.0
+offset_top = 16.0
+offset_right = 953.0
+offset_bottom = 56.0
+theme_override_font_sizes/font_size = 29
+text = "Puzzles"
+
+[node name="Dropdown" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 848.0
+offset_top = 339.0
+offset_right = 893.0
+offset_bottom = 359.0
+
+[node name="Troubleshooting" type="Label" parent="."]
+layout_mode = 0
+offset_left = 694.0
+offset_top = 534.0
+offset_right = 821.0
+offset_bottom = 557.0
+text = "Troubleshooting"
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1061.0
+offset_top = 338.0
+offset_right = 1106.0
+offset_bottom = 369.0
+text = "Next"
+
+[connection signal="pressed" from="SinglePuzzle" to="." method="_on_single_puzzle_pressed"]
 [connection signal="pressed" from="TestClear" to="." method="_on_test_clear_pressed"]
 [connection signal="pressed" from="ProvideHint" to="." method="_on_provide_hint_pressed"]
-[connection signal="pressed" from="TestMultiPuzzle" to="." method="_on_test_multi_puzzle_pressed"]
+[connection signal="pressed" from="MultiPuzzle" to="." method="_on_multi_puzzle_pressed"]
 [connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="Puzzle 1" to="." method="_on_puzzle_1_pressed"]
@@ -203,5 +218,4 @@ script = ExtResource("5_32lff")
 [connection signal="pressed" from="Puzzle 3" to="." method="_on_puzzle_3_pressed"]
 [connection signal="pressed" from="Puzzle 4" to="." method="_on_puzzle_4_pressed"]
 [connection signal="pressed" from="Puzzle 5" to="." method="_on_puzzle_5_pressed"]
-[connection signal="pressed" from="CaptureState" to="." method="_on_capture_state_pressed"]
 [connection signal="pressed" from="Main_Menu" to="." method="_on_main_menu_pressed"]

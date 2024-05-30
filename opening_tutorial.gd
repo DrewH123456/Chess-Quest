@@ -8,6 +8,8 @@ extends Control
 @onready var GeneratePath = $GeneratePath
 @onready var OpeningTextEdit = $OpeningTextEdit
 @onready var variation_scene = preload("res://variation.tscn")
+@export var dropdown_path: NodePath
+@onready var dropdown = get_node(dropdown_path)
 var main_menu = "res://main.tscn"
 
 var grid_array = []
@@ -37,6 +39,7 @@ var took_piece_bool = []
 var variations = []
 var current_variation = null
 var variations_mode : bool = false
+var dropdown_shrunk : bool = false
 
 func _ready():
 	for i in range(64):
@@ -58,9 +61,31 @@ func _ready():
 	load_variations("variations.json")
 	for i in variations:
 		i.display_details()
-	
+	add_dropdown_items()	
+	dropdown.set_allow_reselect(true)
 	#load_puzzles_from_file("res://multimove_puzzles2.txt", DataHandler.multi_move_puzzles)
-	pass # Replace with function body.
+	
+func _on_variation_dropdown_item_selected(index):
+	if !dropdown_shrunk:
+				dropdown_shrunk = true
+				remove_item(0)
+				index -= 1
+	match index:
+		0:
+			load_slav()
+		1:
+			load_declined()
+		2:
+			load_accepted()
+			
+func add_dropdown_items():
+	dropdown.add_item("Currently Selecting: None")
+	dropdown.add_item("Slav Defense")
+	dropdown.add_item("Accepted Variation")
+	dropdown.add_item("Declined Variation")
+
+func remove_item(id):
+	dropdown.remove_item(id)
 
 # Function to load variations from a file
 func load_variations(file_path: String) -> void:
@@ -98,6 +123,10 @@ func load_variations(file_path: String) -> void:
 		if "next" in variation_data:
 			for next_index in variation_data["next"]:
 				variation.add_next(variations[next_index])
+				
+		if "analysis" in variation_data:
+			print("Here")
+			variation.set_analysis(variation_data["analysis"])
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -133,11 +162,13 @@ func load_puzzles_from_file(file_path: String, datahandler_array: Array) -> void
 			var line = file.get_line().strip_edges()
 			if line.is_empty():
 				continue
-			var parsed_puzzle = line.split(";", true, 2)
+			var parsed_puzzle = line.split(";", true, 3)
 			var appended_array = []
 			appended_array.append(parse_fen_array(parsed_puzzle[0]))
 			appended_array.append(int(parsed_puzzle[1]))
 			appended_array.append(string_to_bool(parsed_puzzle[2]))
+			appended_array.append(parse_string_array(parsed_puzzle[3]))
+			print(appended_array[3])
 			datahandler_array.append(appended_array)
 	else:
 		file.close()
@@ -161,8 +192,22 @@ func string_to_bool(is_white: String) -> bool:
 	elif (is_white.to_lower() == "black"):
 		return false
 	else:
-		assert(false, "Error loading text file, is_white must be either 'White' or 'Black'")
+		print(is_white)
+		#assert(false, "Error loading text file, is_white must be either 'White' or 'Black'")
 		return false
+
+# Parse string array
+func parse_string_array(str_array: String) -> Array:
+	str_array = str_array.dedent()
+	# Remove brackets and split the string into individual elements
+	var string_array = str_array.substr(1, str_array.length() - 2).split(",")
+	for i in range(string_array.size()):
+		string_array[i] = string_array[i].strip_edges()
+		# Manually remove quotes if present
+		if string_array[i].begins_with('"') and string_array[i].ends_with('"'):
+			string_array[i] = string_array[i].substr(1, string_array[i].length() - 2)
+	# Return the array of strings
+	return string_array
 
 # Upon creation of slot, assigned slot_ID, added to bo	ard_grid, and inserted into grid_array
 func create_slot():
@@ -478,27 +523,33 @@ func _on_queens_gambit_tutorial_pressed():
 	total_puzzle_moves = current_puzzle[1]
 	isWhite = current_puzzle[2]
 	lock_movement = true
+	if dropdown_shrunk:
+		dropdown_shrunk = false
+		dropdown.clear()
+		add_dropdown_items()
+	OpeningTextEdit.call("add_text", current_puzzle[3][puzzle_move_count])
 
-func _on_prev_pressed():
-	#var add_piece = removed_piece_slot
-	OpeningTextEdit.call("add_text", "")
-	var temp_removed_piece_type = removed_piece_type
-	var temp_removed_piece_slot = removed_piece_slot
-	if !allow_retry:
-		print("Can't retry")
-		OpeningTextEdit.call("add_text", "Can't retry")
-		return
-	move_piece(piece_to_unmove, prev_slot)
-	if temp_removed_piece_slot:
-		add_piece(temp_removed_piece_type, temp_removed_piece_slot)
-		bitboard.call("AddPiece", 63 - temp_removed_piece_slot, temp_removed_piece_type)
-	isWhite = !isWhite
-	lock_movement = false
-	allow_retry = false
-	temp_removed_piece_type = null
-	temp_removed_piece_slot = null
-	removed_piece_slot = null
-	removed_piece_type = null
+#func _on_prev_pressed():
+	#print("hello")
+	##var add_piece = removed_piece_slot
+	#OpeningTextEdit.call("add_text", "")
+	#var temp_removed_piece_type = removed_piece_type
+	#var temp_removed_piece_slot = removed_piece_slot
+	#if !allow_retry:
+		#print("Can't retry")
+		#OpeningTextEdit.call("add_text", "Can't retry")
+		#return
+	#move_piece(piece_to_unmove, prev_slot)
+	#if temp_removed_piece_slot:
+		#add_piece(temp_removed_piece_type, temp_removed_piece_slot)
+		#bitboard.call("AddPiece", 63 - temp_removed_piece_slot, temp_removed_piece_type)
+	#isWhite = !isWhite
+	#lock_movement = false
+	#allow_retry = false
+	#temp_removed_piece_type = null
+	#temp_removed_piece_slot = null
+	#removed_piece_slot = null
+	#removed_piece_type = null
 
 func _on_next_pressed():
 	if puzzle_move_count >= total_puzzle_moves:
@@ -510,6 +561,7 @@ func _on_next_pressed():
 		#print(i)
 	print("Puzzle Move Count: ", puzzle_move_count)
 	isWhite = !isWhite
+	OpeningTextEdit.call("add_text", current_puzzle[3][puzzle_move_count])
 
 func _on_previous_pressed():
 	if variations_mode:
@@ -536,6 +588,7 @@ func _on_previous_pressed():
 		add_piece(prev_taken_type, prev_taken_slot)
 		bitboard.call("AddPiece", 63 - prev_taken_slot, prev_taken_type)
 	puzzle_move_count -= 1
+	OpeningTextEdit.call("add_text", current_puzzle[3][puzzle_move_count])
 	prev_move_made = false
 	isWhite = !isWhite
 	print("After: Taken array size: ", taken_slot_array.size(), ", ", "Move count: ", puzzle_move_count)
@@ -545,6 +598,7 @@ func variations_previous():
 		isWhite = !isWhite
 		current_variation = current_variation.get_previous()
 		make_tutorial_move(current_variation.fen)
+		OpeningTextEdit.call("add_text", current_variation.analysis)
 	else:
 		print("No more prev")
 	
@@ -553,7 +607,7 @@ func _on_variation_1_pressed():
 		current_variation = current_variation.next_variations[0]
 		make_tutorial_move(current_variation.fen)
 		isWhite = !isWhite
-		print(isWhite)
+		OpeningTextEdit.call("add_text", current_variation.analysis)
 	else:
 		print("No more next")
 
@@ -563,6 +617,7 @@ func _on_variation_2_pressed():
 		current_variation = current_variation.next_variations[1]
 		make_tutorial_move(current_variation.fen)
 		isWhite = !isWhite
+		OpeningTextEdit.call("add_text", current_variation.analysis)
 	else:
 		print("No more next")
 
@@ -572,29 +627,33 @@ func _on_variation_3_pressed():
 		current_variation = current_variation.next_variations[2]
 		make_tutorial_move(current_variation.fen)
 		isWhite = !isWhite
+		OpeningTextEdit.call("add_text", current_variation.analysis)
 	else:
 		print("No more next")
 
 
-func _on_slav_pressed():
+func load_slav():
 	variations_mode = true
 	clear_board()
 	current_variation = variations[0]
 	parse_fen(current_variation.fen)
 	bitboard.call("InitBitBoard", current_variation.fen)
+	OpeningTextEdit.call("add_text", current_variation.analysis)
 
 
-func _on_declined_pressed():
+func load_declined():
 	variations_mode = true
 	clear_board()
 	current_variation = variations[6]
 	parse_fen(current_variation.fen)
 	bitboard.call("InitBitBoard", current_variation.fen)
+	OpeningTextEdit.call("add_text", current_variation.analysis)
 
 
-func _on_accepted_pressed():
+func load_accepted():
 	variations_mode = true
 	clear_board()
 	current_variation = variations[5]
 	parse_fen(current_variation.fen)
 	bitboard.call("InitBitBoard", current_variation.fen)
+	OpeningTextEdit.call("add_text", current_variation.analysis)
