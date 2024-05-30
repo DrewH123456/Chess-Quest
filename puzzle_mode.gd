@@ -353,6 +353,7 @@ func clear_board():
 	piece_to_unmove = null
 	prev_slot = null
 	allow_retry = false
+	second_hint = false
 	puzzle_move_count = 0
 	clear_board_filter()
 	bitboard.ClearBitboard()

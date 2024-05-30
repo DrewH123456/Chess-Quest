@@ -63,6 +63,7 @@ func _ready():
 		i.display_details()
 	add_dropdown_items()	
 	dropdown.set_allow_reselect(true)
+	lock_movement = true
 	#load_puzzles_from_file("res://multimove_puzzles2.txt", DataHandler.multi_move_puzzles)
 	
 func _on_variation_dropdown_item_selected(index):
@@ -378,7 +379,7 @@ func move_piece(piece, destination) -> void:
 			#print("piece removed location: ", piece_to_remove.slot_ID)
 			taken_type_array.append(piece_to_remove.type)
 			taken_slot_array.append(piece_to_remove.slot_ID)
-		if puzzle_mode:
+		if variations_mode:
 			removed_piece_type = piece_to_remove.type
 			removed_piece_slot = piece_to_remove.slot_ID
 		remove_from_bitboard(piece_to_remove)
@@ -477,7 +478,6 @@ func randomly_select_puzzle(puzzles: Array) -> Array :
 	
 func clear_board():
 	OpeningTextEdit.call("add_text", "")
-	lock_movement = false
 	puzzle_mode = false
 	tutorial_mode = false
 	removed_piece_slot = null
@@ -595,19 +595,30 @@ func _on_previous_pressed():
 	
 func variations_previous():
 	if current_variation.get_previous() != null:
+		var temp_removed_piece_type = removed_piece_type
+		var temp_removed_piece_slot = removed_piece_slot
 		isWhite = !isWhite
 		current_variation = current_variation.get_previous()
 		make_tutorial_move(current_variation.fen)
+		if temp_removed_piece_type:
+			add_piece(temp_removed_piece_type, temp_removed_piece_slot)
+			bitboard.call("AddPiece", 63 - temp_removed_piece_slot, temp_removed_piece_type)
 		OpeningTextEdit.call("add_text", current_variation.analysis)
+		temp_removed_piece_type = null
+		temp_removed_piece_slot = null
+		removed_piece_slot = null
+		removed_piece_type = null
 	else:
 		print("No more prev")
 	
 func _on_variation_1_pressed():
 	if current_variation.next_variations.size() > 0:
+		print(removed_piece_slot, " ", removed_piece_type)
 		current_variation = current_variation.next_variations[0]
 		make_tutorial_move(current_variation.fen)
 		isWhite = !isWhite
 		OpeningTextEdit.call("add_text", current_variation.analysis)
+		print(removed_piece_slot, " ", removed_piece_type)
 	else:
 		print("No more next")
 
@@ -618,6 +629,7 @@ func _on_variation_2_pressed():
 		make_tutorial_move(current_variation.fen)
 		isWhite = !isWhite
 		OpeningTextEdit.call("add_text", current_variation.analysis)
+		print(removed_piece_slot, " ", removed_piece_type)
 	else:
 		print("No more next")
 
@@ -628,6 +640,7 @@ func _on_variation_3_pressed():
 		make_tutorial_move(current_variation.fen)
 		isWhite = !isWhite
 		OpeningTextEdit.call("add_text", current_variation.analysis)
+		print(removed_piece_slot, " ", removed_piece_type)
 	else:
 		print("No more next")
 
