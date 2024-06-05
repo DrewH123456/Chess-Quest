@@ -168,4 +168,5 @@ offset_bottom = 373.0
 [connection signal="pressed" from="Variation 1" to="." method="_on_variation_1_pressed"]
 [connection signal="pressed" from="Variation 2" to="." method="_on_variation_2_pressed"]
 [connection signal="pressed" from="Variation 3" to="." method="_on_variation_3_pressed"]
+[connection signal="pressed" from="Help" to="." method="_on_help_pressed"]
 [connection signal="item_selected" from="Variation Dropdown" to="." method="_on_variation_dropdown_item_selected"]

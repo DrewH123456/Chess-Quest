@@ -657,7 +657,7 @@ func load_slav():
 func load_declined():
 	variations_mode = true
 	clear_board()
-	current_variation = variations[6]
+	current_variation = variations[5]
 	parse_fen(current_variation.fen)
 	bitboard.call("InitBitBoard", current_variation.fen)
 	OpeningTextEdit.call("add_text", current_variation.analysis)
@@ -666,7 +666,11 @@ func load_declined():
 func load_accepted():
 	variations_mode = true
 	clear_board()
-	current_variation = variations[5]
+	current_variation = variations[6]
 	parse_fen(current_variation.fen)
 	bitboard.call("InitBitBoard", current_variation.fen)
 	OpeningTextEdit.call("add_text", current_variation.analysis)
+
+
+func _on_help_pressed():
+	OpeningTextEdit.call("add_text", "current_variation.analysis")

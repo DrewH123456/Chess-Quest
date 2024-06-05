@@ -60,6 +60,21 @@ func add_items():
 	dropdown.add_item("Puzzle 3")
 	dropdown.add_item("Puzzle 4")
 	dropdown.add_item("Puzzle 5")
+	dropdown.add_item("Puzzle 1")
+	dropdown.add_item("Puzzle 2")
+	dropdown.add_item("Puzzle 3")
+	dropdown.add_item("Puzzle 4")
+	dropdown.add_item("Puzzle 5")
+	dropdown.add_item("Puzzle 1")
+	dropdown.add_item("Puzzle 2")
+	dropdown.add_item("Puzzle 3")
+	dropdown.add_item("Puzzle 4")
+	dropdown.add_item("Puzzle 5")
+	dropdown.add_item("Puzzle 1")
+	dropdown.add_item("Puzzle 2")
+	dropdown.add_item("Puzzle 3")
+	dropdown.add_item("Puzzle 4")
+	dropdown.add_item("Puzzle 5")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -470,3 +485,7 @@ func _on_single_puzzle_pressed():
 
 func _on_multi_puzzle_pressed():
 	puzzle_set = DataHandler.multi_move_puzzles
+
+
+func _on_help_pressed():
+	PuzzleTextEdit.call("add_text", "Help")
