@@ -24,18 +24,18 @@ enum slot_states {NONE, FREE, CHECK, HINT}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	assets.append("res://Piece Images/white_bishop.png")
-	assets.append("res://Piece Images/white_king.png")
-	assets.append("res://Piece Images/white_knight.png")
-	assets.append("res://Piece Images/white_pawn.png")
-	assets.append("res://Piece Images/white_queen.png")
-	assets.append("res://Piece Images/white_rook.png")
-	assets.append("res://Piece Images/black_bishop.png")
-	assets.append("res://Piece Images/black_king.png")
-	assets.append("res://Piece Images/black_knight.png")
-	assets.append("res://Piece Images/black_pawn.png")
-	assets.append("res://Piece Images/black_queen.png")
-	assets.append("res://Piece Images/black_rook.png")
+	assets.append("res://Piece Images/Chess_blt60.png")
+	assets.append("res://Piece Images/Chess_klt60.png")
+	assets.append("res://Piece Images/Chess_nlt60.png")
+	assets.append("res://Piece Images/Chess_plt60.png")
+	assets.append("res://Piece Images/Chess_qlt60.png")
+	assets.append("res://Piece Images/Chess_rlt60.png")
+	assets.append("res://Piece Images/Chess_bdt60.png") 
+	assets.append("res://Piece Images/Chess_kdt60.png")
+	assets.append("res://Piece Images/Chess_ndt60.png")
+	assets.append("res://Piece Images/Chess_pdt60.png")
+	assets.append("res://Piece Images/Chess_qdt60.png")
+	assets.append("res://Piece Images/Chess_rdt60.png")
 	pass # Replace with function body.
 
 # Fen strings, total moves, isWhite

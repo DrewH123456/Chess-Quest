@@ -4,13 +4,13 @@
 			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/8/PP2PPPP/RNBQKBNR",
 			"previous": null,
 			"next": [1, 2, 3],
-			"analysis": "0"
+			"analysis": "Black plays c6 to maintain a strong pawn structure and fight for the center."
 		},
 		{
 			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R",
 			"previous": 0,
-			"next": [4],
-			"analysis": "1"
+			"next": [4, 7],
+			"analysis": "White develops their knight, gaining more control over the e5 square."
 		},
 		{
 			"fen": "rnbqkbnr/pp2pppp/2p5/3p4/2PP4/2N5/PP2PPPP/R1BQKBNR",
@@ -28,7 +28,7 @@
 			"fen": "rnbqkb1r/pp2pppp/2p2n2/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R",
 			"previous": 1,
 			"next": [],
-			"analysis": "4"
+			"analysis": "Black develops their knight, providing protection of the d5 square and threatening the e5 square."
 		},
 		{
 			"fen": "rnbqkbnr/ppp1pppp/8/8/2pP4/8/PP2PPPP/RNBQKBNR",
@@ -41,6 +41,12 @@
 			"previous": null,
 			"next": [1, 2, 3],
 			"analysis": "6"
+		},
+		{
+			"fen": "rnbqkbnr/pp3ppp/2p1p3/3p4/2PP4/5N2/PP2PPPP/RNBQKB1R",
+			"previous": 1,
+			"next": [],
+			"analysis": "Black moves to e6, defending the d5 square"
 		},
 	]
 }

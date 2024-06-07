@@ -14,7 +14,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_rd2i4")
-dropdown_path = NodePath("Dropdown")
+dropdown_path = NodePath("Single Dropdown")
+second_dropdown_path = NodePath("Multi Dropdown")
 
 [node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
@@ -59,14 +60,16 @@ script = ExtResource("3_4qdxx")
 script = ExtResource("4_00esy")
 
 [node name="SinglePuzzle" type="Button" parent="."]
+visible = false
 layout_mode = 0
-offset_left = 675.0
-offset_top = 338.0
-offset_right = 838.0
-offset_bottom = 369.0
+offset_left = 620.0
+offset_top = 314.0
+offset_right = 783.0
+offset_bottom = 345.0
 text = "Single-Move Puzzles"
 
 [node name="TestClear" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 785.0
 offset_top = 592.0
@@ -76,14 +79,16 @@ text = "Clear"
 
 [node name="ProvideHint" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1054.0
-offset_top = 374.0
-offset_right = 1095.0
-offset_bottom = 405.0
+offset_left = 984.0
+offset_top = 330.0
+offset_right = 1023.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 15
 text = "Hint
 "
 
 [node name="MultiPuzzle" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 675.0
 offset_top = 375.0
@@ -91,23 +96,24 @@ offset_right = 838.0
 offset_bottom = 406.0
 text = "Multi-Move Puzzles"
 
-[node name="Restart" type="Button" parent="."]
+[node name="Restart Puzzle" type="Button" parent="."]
 layout_mode = 0
-offset_left = 979.0
-offset_top = 374.0
-offset_right = 1044.0
-offset_bottom = 405.0
-text = "Restart	"
+offset_left = 985.0
+offset_top = 370.0
+offset_right = 1103.0
+offset_bottom = 401.0
+text = "Restart Puzzle"
 
-[node name="Previous" type="Button" parent="."]
+[node name="Retry Move" type="Button" parent="."]
 layout_mode = 0
-offset_left = 980.0
-offset_top = 337.0
-offset_right = 1055.0
-offset_bottom = 368.0
-text = "Previous"
+offset_left = 985.0
+offset_top = 370.0
+offset_right = 1081.0
+offset_bottom = 401.0
+text = "Retry Move"
 
 [node name="Puzzle 1" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 656.0
 offset_top = 571.0
@@ -116,6 +122,7 @@ offset_bottom = 602.0
 text = "1"
 
 [node name="Puzzle 2" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 694.0
 offset_top = 571.0
@@ -124,6 +131,7 @@ offset_bottom = 602.0
 text = "2"
 
 [node name="Puzzle 3" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 733.0
 offset_top = 571.0
@@ -132,6 +140,7 @@ offset_bottom = 602.0
 text = "3"
 
 [node name="Puzzle 4" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 674.0
 offset_top = 608.0
@@ -140,6 +149,7 @@ offset_bottom = 639.0
 text = "4"
 
 [node name="Puzzle 5" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 713.0
 offset_top = 608.0
@@ -162,7 +172,6 @@ offset_left = 675.0
 offset_top = 76.0
 offset_right = 1125.0
 offset_bottom = 321.0
-placeholder_text = "Insert Text Here"
 wrap_mode = 1
 script = ExtResource("5_32lff")
 
@@ -184,14 +193,22 @@ offset_bottom = 56.0
 theme_override_font_sizes/font_size = 29
 text = "Puzzles"
 
-[node name="Dropdown" type="OptionButton" parent="."]
+[node name="Single Dropdown" type="OptionButton" parent="."]
 layout_mode = 0
-offset_left = 848.0
-offset_top = 339.0
-offset_right = 893.0
-offset_bottom = 359.0
+offset_left = 675.0
+offset_top = 358.0
+offset_right = 720.0
+offset_bottom = 378.0
+
+[node name="Multi Dropdown" type="OptionButton" parent="."]
+layout_mode = 0
+offset_left = 829.0
+offset_top = 358.0
+offset_right = 874.0
+offset_bottom = 378.0
 
 [node name="Troubleshooting" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 694.0
 offset_top = 534.0
@@ -199,20 +216,39 @@ offset_right = 821.0
 offset_bottom = 557.0
 text = "Troubleshooting"
 
-[node name="Button2" type="Button" parent="."]
+[node name="Next Puzzle Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1061.0
-offset_top = 338.0
-offset_right = 1106.0
-offset_bottom = 369.0
-text = "Next"
+offset_left = 1031.0
+offset_top = 330.0
+offset_right = 1124.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 15
+text = "Next Puzzle"
+
+[node name="Single-Move Puzzles" type="Label" parent="."]
+layout_mode = 0
+offset_left = 705.0
+offset_top = 331.0
+offset_right = 793.0
+offset_bottom = 353.0
+theme_override_font_sizes/font_size = 15
+text = "Single-Move"
+
+[node name="Multi-Move Puzzles" type="Label" parent="."]
+layout_mode = 0
+offset_left = 862.0
+offset_top = 331.0
+offset_right = 945.0
+offset_bottom = 353.0
+theme_override_font_sizes/font_size = 15
+text = "Multi-Move"
 
 [connection signal="pressed" from="SinglePuzzle" to="." method="_on_single_puzzle_pressed"]
 [connection signal="pressed" from="TestClear" to="." method="_on_test_clear_pressed"]
 [connection signal="pressed" from="ProvideHint" to="." method="_on_provide_hint_pressed"]
 [connection signal="pressed" from="MultiPuzzle" to="." method="_on_multi_puzzle_pressed"]
-[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="Previous" to="." method="_on_previous_pressed"]
+[connection signal="pressed" from="Restart Puzzle" to="." method="_on_restart_pressed"]
+[connection signal="pressed" from="Retry Move" to="." method="_on_previous_pressed"]
 [connection signal="pressed" from="Puzzle 1" to="." method="_on_puzzle_1_pressed"]
 [connection signal="pressed" from="Puzzle 2" to="." method="_on_puzzle_2_pressed"]
 [connection signal="pressed" from="Puzzle 3" to="." method="_on_puzzle_3_pressed"]
@@ -220,3 +256,6 @@ text = "Next"
 [connection signal="pressed" from="Puzzle 5" to="." method="_on_puzzle_5_pressed"]
 [connection signal="pressed" from="Main_Menu" to="." method="_on_main_menu_pressed"]
 [connection signal="pressed" from="Help" to="." method="_on_help_pressed"]
+[connection signal="item_selected" from="Single Dropdown" to="." method="_on_single_dropdown_item_selected"]
+[connection signal="item_selected" from="Multi Dropdown" to="." method="_on_multi_dropdown_item_selected"]
+[connection signal="pressed" from="Next Puzzle Button" to="." method="_on_next_puzzle_button_pressed"]

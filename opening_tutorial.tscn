@@ -71,6 +71,7 @@ offset_right = 1125.0
 offset_bottom = 321.0
 placeholder_text = "Insert Text Here"
 editable = false
+wrap_mode = 1
 script = ExtResource("2_1flga")
 
 [node name="BitBoard" type="Node2D" parent="."]
@@ -81,43 +82,43 @@ script = ExtResource("4_as3pl")
 
 [node name="Next" type="Button" parent="."]
 layout_mode = 0
-offset_left = 916.0
-offset_top = 430.0
-offset_right = 976.0
-offset_bottom = 463.0
+offset_left = 910.0
+offset_top = 434.0
+offset_right = 966.0
+offset_bottom = 465.0
 text = "Next
 "
 
 [node name="Previous" type="Button" parent="."]
 layout_mode = 0
-offset_left = 801.0
-offset_top = 430.0
-offset_right = 876.0
-offset_bottom = 466.0
+offset_left = 819.0
+offset_top = 434.0
+offset_right = 894.0
+offset_bottom = 465.0
 text = "Previous"
 
 [node name="Variation 1" type="Button" parent="."]
 layout_mode = 0
-offset_left = 782.0
-offset_top = 539.0
-offset_right = 843.0
-offset_bottom = 587.0
+offset_left = 789.0
+offset_top = 536.0
+offset_right = 850.0
+offset_bottom = 584.0
 text = "1"
 
 [node name="Variation 2" type="Button" parent="."]
 layout_mode = 0
-offset_left = 863.0
-offset_top = 540.0
-offset_right = 927.0
-offset_bottom = 587.0
+offset_left = 865.0
+offset_top = 536.0
+offset_right = 929.0
+offset_bottom = 583.0
 text = "2"
 
 [node name="Variation 3" type="Button" parent="."]
 layout_mode = 0
-offset_left = 945.0
-offset_top = 539.0
-offset_right = 1009.0
-offset_bottom = 587.0
+offset_left = 943.0
+offset_top = 536.0
+offset_right = 1007.0
+offset_bottom = 584.0
 text = "3"
 
 [node name="Help" type="Button" parent="."]
@@ -160,6 +161,160 @@ offset_left = 870.0
 offset_top = 353.0
 offset_right = 915.0
 offset_bottom = 373.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 616.0
+offset_right = 23.0
+offset_bottom = 639.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "a"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 91.0
+offset_top = 615.0
+offset_right = 101.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "b"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 169.0
+offset_top = 615.0
+offset_right = 179.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "c"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 248.0
+offset_top = 615.0
+offset_right = 258.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "d"
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 325.0
+offset_top = 615.0
+offset_right = 335.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "e"
+
+[node name="Label6" type="Label" parent="."]
+offset_left = 403.0
+offset_top = 615.0
+offset_right = 413.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "f"
+
+[node name="Label7" type="Label" parent="."]
+offset_left = 482.0
+offset_top = 613.0
+offset_right = 492.0
+offset_bottom = 636.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "g"
+
+[node name="Label8" type="Label" parent="."]
+offset_left = 558.0
+offset_top = 616.0
+offset_right = 569.0
+offset_bottom = 639.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "h"
+
+[node name="Label9" type="Label" parent="."]
+offset_left = 626.0
+offset_top = 555.0
+offset_right = 637.0
+offset_bottom = 578.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "1"
+
+[node name="Label10" type="Label" parent="."]
+offset_left = 627.0
+offset_top = 8.0
+offset_right = 638.0
+offset_bottom = 31.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "8"
+
+[node name="Label11" type="Label" parent="."]
+offset_left = 625.0
+offset_top = 88.0
+offset_right = 636.0
+offset_bottom = 111.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "7"
+
+[node name="Label12" type="Label" parent="."]
+offset_left = 625.0
+offset_top = 165.0
+offset_right = 636.0
+offset_bottom = 188.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "6"
+
+[node name="Label13" type="Label" parent="."]
+offset_left = 625.0
+offset_top = 243.0
+offset_right = 636.0
+offset_bottom = 266.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "5"
+
+[node name="Label14" type="Label" parent="."]
+offset_left = 625.0
+offset_top = 321.0
+offset_right = 636.0
+offset_bottom = 344.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "4"
+
+[node name="Label15" type="Label" parent="."]
+offset_left = 625.0
+offset_top = 399.0
+offset_right = 636.0
+offset_bottom = 422.0
+theme_override_colors/font_color = Color(0.65098, 0, 0, 1)
+text = "3"
+
+[node name="Label16" type="Label" parent="."]
+offset_left = 625.0
+offset_top = 477.0
+offset_right = 636.0
+offset_bottom = 500.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "2"
+
+[node name="variant 1(MAKE VISIBLE)" type="Label" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 804.0
+offset_top = 524.0
+offset_right = 844.0
+offset_bottom = 547.0
+text = "Nf6"
+
+[node name="variant 2" type="Label" parent="."]
+visible = false
+offset_left = 889.0
+offset_top = 524.0
+offset_right = 929.0
+offset_bottom = 547.0
+text = "e6"
+
+[node name="variant 3" type="Label" parent="."]
+visible = false
+offset_left = 956.0
+offset_top = 525.0
+offset_right = 996.0
+offset_bottom = 548.0
+text = "dxc4"
 
 [connection signal="pressed" from="Main_Button" to="." method="_on_main_pressed"]
 [connection signal="pressed" from="Queen's Gambit Tutorial" to="." method="_on_queens_gambit_tutorial_pressed"]

@@ -9,11 +9,15 @@ extends Control
 @onready var PuzzleTextEdit = $PuzzleTextEdit
 @export var dropdown_path: NodePath
 @onready var dropdown = get_node(dropdown_path)
+@export var second_dropdown_path: NodePath
+@onready var second_dropdown = get_node(second_dropdown_path)
 var main_menu = "res://main.tscn"
+@onready var restart_button = $"Restart Puzzle"
+@onready var retry_button = $"Retry Move"
 
 var grid_array := [] # Contains all 64 slots(This is how you interact with slots)
 var piece_array := [] # Represents piece assigned to each of the 64 slots. 0 if empty
-var icon_offset := Vector2(39, 39) # Centers chess pieces within slot
+var icon_offset := Vector2(38, 38) # Centers chess pieces within slot
 # var fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1" # Represents starting chess position
 var fen = "8/8/k4r1R/8/8/5n2/n7/8"
 var puzzle_fen = "r3n1k1/pb5q/1p2N2p/P2pP2r/4nQ2/1PbRRN1P/5PBK/8 w - - 3 30"
@@ -31,6 +35,9 @@ var removed_piece_slot = null
 var removed_piece_type = null
 var second_hint : bool = false
 var puzzle_set = null
+var dropdown_shrunk : bool = false
+var second_dropdown_shrunk : bool = false
+var current_puzzle_index = 0
 
 # Spawns slots
 func _ready():
@@ -52,29 +59,58 @@ func _ready():
 	piece_array.fill(0)
 	load_puzzles_from_file("res://singlemove_puzzles2.txt", DataHandler.single_move_puzzles)
 	load_puzzles_from_file("res://multimove_puzzles2.txt", DataHandler.multi_move_puzzles)
-	add_items()
+	add_single_items()
+	add_multi_items()
+	dropdown.set_allow_reselect(true)
+	second_dropdown.set_allow_reselect(true)
+	restart_button.visible = false
+	retry_button.visible = false
 
-func add_items():
+func add_single_items():
+	dropdown.add_item("Select Puzzle")
 	dropdown.add_item("Puzzle 1")
 	dropdown.add_item("Puzzle 2")
 	dropdown.add_item("Puzzle 3")
 	dropdown.add_item("Puzzle 4")
 	dropdown.add_item("Puzzle 5")
-	dropdown.add_item("Puzzle 1")
-	dropdown.add_item("Puzzle 2")
-	dropdown.add_item("Puzzle 3")
-	dropdown.add_item("Puzzle 4")
-	dropdown.add_item("Puzzle 5")
-	dropdown.add_item("Puzzle 1")
-	dropdown.add_item("Puzzle 2")
-	dropdown.add_item("Puzzle 3")
-	dropdown.add_item("Puzzle 4")
-	dropdown.add_item("Puzzle 5")
-	dropdown.add_item("Puzzle 1")
-	dropdown.add_item("Puzzle 2")
-	dropdown.add_item("Puzzle 3")
-	dropdown.add_item("Puzzle 4")
-	dropdown.add_item("Puzzle 5")
+	dropdown.add_item("Puzzle 6")
+	dropdown.add_item("Puzzle 7")
+	dropdown.add_item("Puzzle 8")
+	dropdown.add_item("Puzzle 9")
+	dropdown.add_item("Puzzle 10")
+	dropdown.add_item("Puzzle 11")
+	dropdown.add_item("Puzzle 12")
+	dropdown.add_item("Puzzle 13")
+	dropdown.add_item("Puzzle 14")
+	dropdown.add_item("Puzzle 15")
+	dropdown.add_item("Puzzle 16")
+	dropdown.add_item("Puzzle 17")
+	dropdown.add_item("Puzzle 18")
+	dropdown.add_item("Puzzle 19")
+	dropdown.add_item("Puzzle 20")
+
+func add_multi_items():
+	second_dropdown.add_item("Select Puzzle")
+	second_dropdown.add_item("Puzzle 1")
+	second_dropdown.add_item("Puzzle 2")
+	second_dropdown.add_item("Puzzle 3")
+	second_dropdown.add_item("Puzzle 4")
+	second_dropdown.add_item("Puzzle 5")
+	second_dropdown.add_item("Puzzle 6")
+	second_dropdown.add_item("Puzzle 7")
+	second_dropdown.add_item("Puzzle 8")
+	second_dropdown.add_item("Puzzle 9")
+	second_dropdown.add_item("Puzzle 10")
+	second_dropdown.add_item("Puzzle 11")
+	second_dropdown.add_item("Puzzle 12")
+	second_dropdown.add_item("Puzzle 13")
+	second_dropdown.add_item("Puzzle 14")
+	second_dropdown.add_item("Puzzle 15")
+	second_dropdown.add_item("Puzzle 16")
+	second_dropdown.add_item("Puzzle 17")
+	second_dropdown.add_item("Puzzle 18")
+	second_dropdown.add_item("Puzzle 19")
+	second_dropdown.add_item("Puzzle 20")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -179,6 +215,7 @@ func puzzle_move(slot) -> void:
 		piece_to_unmove = piece_selected
 		lock_movement = true
 		allow_retry = true
+		retry_button.visible = true
 		return # insert retry logic
 	puzzle_move_count += 1
 	if (puzzle_move_count == total_puzzle_moves):
@@ -254,6 +291,8 @@ func puzzle_end():
 	lock_movement = true
 	puzzle_mode = false
 	allow_retry = false
+	restart_button.visible = true
+	retry_button.visible = false
 	print("Puzzle solved!")
 	PuzzleTextEdit.call("add_text", "Puzzle solved!")
 
@@ -293,6 +332,7 @@ func add_piece(piece_type, location) -> void:
 	new_piece.global_position = grid_array[location].global_position + icon_offset
 	piece_array[location] = new_piece
 	new_piece.slot_ID = location
+	new_piece.scale = Vector2(1.35, 1.35)
 	new_piece.piece_selected.connect(_on_piece_selected)
 
 # Handles when piece is selected on GUI
@@ -368,6 +408,8 @@ func clear_board():
 	piece_to_unmove = null
 	prev_slot = null
 	allow_retry = false
+	retry_button.visible = false
+	restart_button.visible = false
 	second_hint = false
 	puzzle_move_count = 0
 	clear_board_filter()
@@ -418,18 +460,20 @@ func _on_provide_hint_pressed():
 func _on_restart_pressed():
 	if current_puzzle:
 		clear_board()
+		PuzzleTextEdit.call("add_text", "Black to Move")
 		parse_fen(current_puzzle[0][0])
 		bitboard.call("InitBitBoard", current_puzzle[0][0])
 		total_puzzle_moves = current_puzzle[1]	
 		isWhite = current_puzzle[2]
 		puzzle_mode = true
+		restart_button.visible = false
 	else:
 		print("Not in puzzle mode")
 		PuzzleTextEdit.call("add_text", "Not in puzzle mode")
 
 func _on_previous_pressed():
 	#var add_piece = removed_piece_slot
-	PuzzleTextEdit.call("add_text", "")
+	PuzzleTextEdit.call("add_text", "Black to Move")
 	var temp_removed_piece_type = removed_piece_type
 	var temp_removed_piece_slot = removed_piece_slot
 	if !allow_retry:
@@ -443,6 +487,7 @@ func _on_previous_pressed():
 	isWhite = !isWhite
 	lock_movement = false
 	allow_retry = false
+	retry_button.visible = false
 	temp_removed_piece_type = null
 	temp_removed_piece_slot = null
 	removed_piece_slot = null
@@ -489,3 +534,64 @@ func _on_multi_puzzle_pressed():
 
 func _on_help_pressed():
 	PuzzleTextEdit.call("add_text", "Help")
+
+
+func _on_single_dropdown_item_selected(index):
+	if !dropdown_shrunk:
+		if index < 1:
+			return
+		dropdown_shrunk = true
+		remove_single_item(0)
+		index -= 1
+	if second_dropdown_shrunk:
+		second_dropdown_shrunk = false
+		second_dropdown.clear()
+		add_multi_items()
+	current_puzzle_index = index
+	puzzle_set = DataHandler.single_move_puzzles
+	clear_board()
+	PuzzleTextEdit.call("add_text", "Black to Move")
+	current_puzzle = puzzle_set[index]
+	init_puzzle(puzzle_set[index])
+
+func _on_multi_dropdown_item_selected(index):
+	if !second_dropdown_shrunk:
+		if index < 1:
+			return
+		second_dropdown_shrunk = true
+		remove_multi_item(0)
+		index -= 1
+	if second_dropdown_shrunk:
+		dropdown_shrunk = false
+		dropdown.clear()
+		add_single_items()
+	current_puzzle_index = index
+	puzzle_set = DataHandler.multi_move_puzzles
+	clear_board()
+	PuzzleTextEdit.call("add_text", "Black to Move")
+	current_puzzle = puzzle_set[index]
+	init_puzzle(puzzle_set[index])
+	
+func remove_single_item(id):
+	dropdown.remove_item(id)
+	
+func remove_multi_item(id):
+	second_dropdown.remove_item(id)
+
+func _on_next_puzzle_button_pressed():
+	restart_button.visible = false
+	retry_button.visible = false
+	if !puzzle_set:
+		return
+	dropdown_shrunk = false
+	dropdown.clear()
+	add_single_items()
+	second_dropdown_shrunk = false
+	second_dropdown.clear()
+	add_multi_items()
+	clear_board()
+	current_puzzle_index += 1
+	if current_puzzle_index >= 20:
+		current_puzzle_index = 0
+	current_puzzle = puzzle_set[current_puzzle_index]
+	init_puzzle(puzzle_set[current_puzzle_index])

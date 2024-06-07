@@ -14,7 +14,7 @@ var main_menu = "res://main.tscn"
 
 var grid_array = []
 var piece_array := []
-var icon_offset := Vector2(39, 39) # Centers chess pieces within slot
+var icon_offset := Vector2(38, 38) # Centers chess pieces within slot
 var piece_selected = null
 var puzzle_mode : bool = false
 var isWhite : bool = true
@@ -410,6 +410,7 @@ func add_piece(piece_type, location) -> void:
 	new_piece.global_position = grid_array[location].global_position + icon_offset
 	piece_array[location] = new_piece
 	new_piece.slot_ID = location
+	new_piece.scale = Vector2(1.35, 1.35)
 	new_piece.piece_selected.connect(_on_piece_selected)
 
 # Handles when piece is selected on GUI
