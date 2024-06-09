@@ -172,6 +172,8 @@ offset_left = 675.0
 offset_top = 76.0
 offset_right = 1125.0
 offset_bottom = 321.0
+text = "Select a Puzzle!"
+placeholder_text = "Select a Puzzle!"
 wrap_mode = 1
 script = ExtResource("5_32lff")
 
